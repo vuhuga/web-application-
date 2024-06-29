@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="head">
+        <h1>SUBMIT YOUR FEEDBACK</h1>
+    </div>
+    <div class="form">
+        <fieldset>
+            <form action="submit_feedback.php" method="POST" id="form" onsubmit="return validateForm()">
+                <label for="nam">Name:</label><br>
+                <input type="text" id="nam" name="name" required><br>
+                <span id="name-error" class="error-message"></span>
+
+                <label for="emal">Email:</label><br>
+                <input type="text" id="emal" name="email" required><br>
+                <span id="email-error" class="error-message"></span>
+
+                <label for="rating">How was your Experience?</label><br>
+                <select name="rating" id="rating" required>
+                    <option value="1">1/5</option>
+                    <option value="2">2/5</option>
+                    <option value="3">3/5</option>
+                    <option value="4">4/5</option>
+                    <option value="5">5/5</option>
+                </select><br>
+
+                <label for="review">Describe your Experience:</label><br>
+                <textarea id="review" name="feedback" rows="5" cols="50" required></textarea><br>
+                <span id="feedback-error" class="error-message"></span>
+
+                <button type="submit">Submit</button>
+            </form>
+        </fieldset>
+    </div>
+
+    <script>
+        function validateForm() {
+            var name = document.getElementById('nam').value.trim();
+            var email = document.getElementById('emal').value.trim();
+            var feedback = document.getElementById('review').value.trim();
+            var rating = document.getElementById('rating').value.trim();
+
+            if (name === "") {
+                document.getElementById("name-error").textContent = "Name cannot be empty";
+                return false;
+            } else {
+                document.getElementById("name-error").textContent = "";
+            }
+
+            if (email === "") {
+                document.getElementById("email-error").textContent = "Email cannot be empty";
+                return false;
+            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+                document.getElementById("email-error").textContent = "Invalid email format";
+                return false;
+            } else {
+                document.getElementById("email-error").textContent = "";
+            }
+
+            if (feedback === "") {
+                document.getElementById("feedback-error").textContent = "Feedback cannot be empty";
+                return false;
+            } else {
+                document.getElementById("feedback-error").textContent = "";
+            }
+
+       
+            return true;
+        }
+    </script>
+</body>
+</html>
